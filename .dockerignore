@@ -1,0 +1,12 @@
+**/*.lock
+
+_build
+.elixir_ls
+.vscode
+cover
+deploy
+deps
+doc
+.fetch
+.env
+.sobelow
