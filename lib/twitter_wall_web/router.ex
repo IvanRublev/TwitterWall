@@ -5,6 +5,7 @@ defmodule TwitterWallWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
+    plug Phoenix.LiveView.Flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -16,7 +17,7 @@ defmodule TwitterWallWeb.Router do
   scope "/", TwitterWallWeb do
     pipe_through :browser
 
-    get "/", TweetController, :index
+    live "/", FeedLive, session: %{}
   end
 
   scope "/api", TwitterWallWeb do

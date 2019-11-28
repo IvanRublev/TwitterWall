@@ -16,7 +16,8 @@ config :twitter_wall, TwitterWallWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "VVQQetdG8FjT2oV2T2kIatQAnmdhjslX84vuqdFBo4nywr8y3jNXgZCMlMqbieNx",
   render_errors: [view: TwitterWallWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: TwitterWall.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: TwitterWall.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [signing_salt: "8jwh3e60"]
 
 # Configures Elixir's Logger
 config :logger, :console,
