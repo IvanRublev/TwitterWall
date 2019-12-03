@@ -16,7 +16,7 @@ defmodule Twitter do
     {tweets, errors} =
       case ApiJ1M1.favorites(count) do
         {:ok, %Tesla.Env{status: 200, body: body}} ->
-          {list_date_id(body), []}
+          {body |> list_tweets_date_id() |> apply_kind(:liked), []}
 
         {_, err} ->
           {[], [traceable_error(__ENV__.function, err)]}
@@ -25,15 +25,19 @@ defmodule Twitter do
     Tweets.new(tweets, errors)
   end
 
-  defp list_date_id(body) do
+  defp list_tweets_date_id(body) do
     Enum.map(body, fn
       %{"id" => id, "created_at" => created_at} ->
         date = Timex.parse!(created_at, "{WDshort} {Mshort} {D} {h24}:{m}:{s} {Z} {YYYY}")
         %Tweet{id: id, date: date}
 
       _ ->
-        %{}
+        nil
     end)
+  end
+
+  defp apply_kind(list, kind) do
+    Enum.map(list, &(!is_nil(&1) && %Tweet{&1 | kind: kind}))
   end
 
   defp traceable_error(func, err) do
@@ -45,7 +49,7 @@ defmodule Twitter do
     {tweets, errors} =
       case ApiJ1M1.user_timeline(count) do
         {:ok, %Tesla.Env{status: 200, body: body}} ->
-          {list_date_id(body), []}
+          {body |> list_tweets_date_id() |> apply_kind(:posted), []}
 
         {_, err} ->
           {[], [traceable_error(__ENV__.function, err)]}

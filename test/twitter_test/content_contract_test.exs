@@ -8,6 +8,16 @@ defmodule TwitterTest.ContentContractTest do
   @tweet_base_uri Application.fetch_env!(:twitter_wall, :tweet_base_url)
 
   describe "Twitter should return" do
+    test "tweets of kind liked when liked are requested" do
+      mock_favorites_list_request(fn _ ->
+        [%{id: 123, created_at: "Fri Sep 20 01:18:35 +0000 2019"}]
+      end)
+
+      tweet = List.first(Twitter.liked_tweets(1).all)
+
+      assert %Tweet{kind: :liked} = tweet
+    end
+
     test "Tweet with id and date from api json responses for liked tweets" do
       mock_favorites_list_request(fn _ ->
         [%{id: 123, created_at: "Fri Sep 20 01:18:35 +0000 2019"}]
@@ -32,6 +42,16 @@ defmodule TwitterTest.ContentContractTest do
       assert tweet.id == 456
       assert tweet.date != nil
       assert Timex.equal?(tweet.date, ~U[2019-08-19 05:54:05Z])
+    end
+
+    test "Tweet of kind posted when posted are requested" do
+      mock_user_timeline_request(fn _ ->
+        [%{id: 456, created_at: "Mon Aug 19 05:54:05 +0000 2019"}]
+      end)
+
+      tweet = List.first(Twitter.posted_tweets(1).all)
+
+      assert %Tweet{kind: :posted} = tweet
     end
 
     test "Tweets with list of html populated Tweet for appropriate ids with html from oembed endpoint" do

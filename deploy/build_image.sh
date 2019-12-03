@@ -44,6 +44,7 @@ fi
 
 export SECRET_KEY_BASE=`mix phx.gen.secret`
 export COOKIE=`mix phx.gen.secret`
+export LV_SIGNING_SALT= `mix phx.gen.secret | tail -c 8`
 export PORT=80
 export HOST="localhost"
 

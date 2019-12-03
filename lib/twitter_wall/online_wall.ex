@@ -25,7 +25,7 @@ defmodule TwitterWall.OnlineWall do
     with {:ok, tweets} <- any_tweets(joined, as_result_of_calls: [:liked_tweets, :posted_tweets]),
          last_tweets = sort_by_date_desc_and_take(tweets, count),
          {:ok, htmlized} <- htmlize(last_tweets) do
-      {:ok, Enum.map(htmlized.all, & &1.html)}
+      {:ok, Enum.map(htmlized.all, &{&1.html, &1.kind})}
     end
   end
 

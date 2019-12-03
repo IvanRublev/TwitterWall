@@ -21,6 +21,7 @@ if [ "$answer" != "${answer#[Nn]}" ]; then
 fi
 
 gigalixir config:set -a $app COOKIE=`cd .. && mix phx.gen.secret`
+gigalixir config:set -a $app LV_SIGNING_SALT=`cd .. && mix phx.gen.secret | tail -c 8`
 gigalixir config:set -a $app HOST="tw.ivanrublev.me"
 # PORT and SECRET_KEY_BASE are provided by gigalixir
 for vr in $(cat ../.env | xargs); do
@@ -43,6 +44,9 @@ cat $elixir_bp_cfg
 
 npm_bp_cfg='../phoenix_static_buildpack.config'
 echo "node_version=${nodejs}" > $npm_bp_cfg
+echo "clean_cache=true" >> $npm_bp_cfg
+echo "assets_path=assets" >> $npm_bp_cfg
+echo "phoenix_ex=phx" >> $npm_bp_cfg
 echo "
 ${npm_bp_cfg}:"
 cat $npm_bp_cfg

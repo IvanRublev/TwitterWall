@@ -58,7 +58,7 @@ defmodule TwitterWallWeb.OnlineWallTest.ContractErrorTest do
         }
       end)
 
-      assert(OnlineWall.last_liked_or_posted(3) == {:ok, ["content"]})
+      assert {:ok, [{"content", _}]} = OnlineWall.last_liked_or_posted(3)
     end
   end
 end

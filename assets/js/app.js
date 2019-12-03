@@ -11,7 +11,15 @@ import css from "../css/app.css"
 //
 import "phoenix_html"
 
-// Import local files
-//
-// Local files can be imported directly using relative paths, for example:
-// import socket from "./socket"
+// Connect live view
+import {Socket} from "phoenix"
+import LiveSocket from "phoenix_live_view"
+
+let Hooks = {}
+Hooks.RerenderTweets = {
+    updated() {
+        twttr.widgets.load()
+    }
+}
+let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks})
+liveSocket.connect()

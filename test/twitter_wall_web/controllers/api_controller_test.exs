@@ -127,7 +127,7 @@ defmodule TwitterWallWeb.ApiControllerTest do
 
       assert %{
                "html" =>
-                 "<blockquote>tweet1</blockquote><blockquote>tweet2</blockquote><blockquote>tweet3</blockquote><blockquote>tweet4</blockquote>"
+                 "<div class=\"tw_box\"><div class=\"tw_posted\"></div><blockquote>tweet1</blockquote></div><div class=\"tw_box\"><div class=\"tw_liked\"></div><blockquote>tweet2</blockquote></div><div class=\"tw_box\"><div class=\"tw_posted\"></div><blockquote>tweet3</blockquote></div><div class=\"tw_box\"><div class=\"tw_liked\"></div><blockquote>tweet4</blockquote></div>"
              } = json_response(conn, 200)
     end
 
