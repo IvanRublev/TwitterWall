@@ -70,7 +70,7 @@ defmodule TwitterWallWeb.FeedLive.Test do
       stub_with(TwitterWall.Double, TwitterWall.Stub)
 
       {:ok, view, _html} = live(conn, "/")
-      {:ok, html: render_change(view, :ch_count, %{"tw_count" => 99999999})}
+      {:ok, html: render_change(view, :ch_count, %{"tw_count" => 99_999_999})}
     end
 
     test "not contatin tweets", %{html: html} do

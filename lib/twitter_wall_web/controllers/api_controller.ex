@@ -33,9 +33,10 @@ defmodule TwitterWallWeb.ApiController do
         a_json(conn, %{html: ""})
       else
         case TwitterWall.last_liked_or_posted(tweet_count) do
-          {:ok, htmls} ->
+          {:ok, htmls_kinds} ->
             a_json(conn, %{
-              html: Enum.join(htmls),
+              html:
+              htmls_kinds |> Enum.map(& joined_html(&1)) |> Enum.join(),
               js_rendering_snippet: @rendering_snippet
             })
 
@@ -62,6 +63,10 @@ defmodule TwitterWallWeb.ApiController do
       {:error, _} ->
         send_error(conn, 400, "Outdated")
     end
+  end
+
+  defp joined_html({tw_html, kind}) do
+    "<div class=\"tw_box\"><div class=\"tw_#{Atom.to_string(kind)}\"></div>#{tw_html}</div>"
   end
 
   defp token("Bearer " <> token) do

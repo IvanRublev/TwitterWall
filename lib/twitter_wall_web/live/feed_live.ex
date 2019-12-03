@@ -14,9 +14,9 @@ defmodule TwitterWallWeb.FeedLive do
       |> assign(:general_error, false)
     else
       case TwitterWall.last_liked_or_posted(count) do
-        {:ok, htmls} ->
+        {:ok, htmls_kinds} ->
           socket
-          |> assign(:tweets_html, Phoenix.HTML.raw(htmls))
+          |> assign(:tweets_html, tweets_raw_html(htmls_kinds))
           |> assign(:general_error, false)
 
         {:error, _} ->
@@ -25,6 +25,16 @@ defmodule TwitterWallWeb.FeedLive do
           |> assign(:general_error, true)
       end
     end
+  end
+
+  defp tweets_raw_html(htmls_kinds) do
+    htmls_kinds
+    |> Enum.map(& joined_html(&1))
+    |> Phoenix.HTML.raw()
+  end
+
+  defp joined_html({tw_html, kind}) do
+    "<div class=\"tw_box\"><div class=\"tw_#{Atom.to_string(kind)}\"></div>#{tw_html}</div>"
   end
 
   defp add_validated_count(socket, count) when is_number(count) do
@@ -36,8 +46,8 @@ defmodule TwitterWallWeb.FeedLive do
       end
 
     socket
-      |> assign(:count, count)
-      |> assign(:input_error, input_error)
+    |> assign(:count, count)
+    |> assign(:input_error, input_error)
   end
 
   def render(assigns) do

@@ -10,6 +10,8 @@ defmodule TwitterWall.Stub do
 
   @impl true
   def last_liked_or_posted(count) do
-    {:ok, Enum.map(1..count, fn i -> "<blockquote>tweet#{i}</blockquote>" end)}
+    {:ok, Enum.map(1..count, fn i -> {"<blockquote>tweet#{i}</blockquote>", tw_kind(i)} end)}
   end
+
+  defp tw_kind(i), do: rem(i, 2) == 0 && :liked || :posted
 end
