@@ -4,7 +4,7 @@ defmodule TwitterWall.MixProject do
   def project do
     [
       app: :twitter_wall,
-      version: "0.1.0",
+      version: "0.1." <> File.read!("BUILD.MD"),
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       elixirc_options: elixirc_options(Mix.env()),
