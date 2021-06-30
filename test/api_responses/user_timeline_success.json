@@ -1,0 +1,636 @@
+[
+    {
+      "created_at": "Sat Jun 26 16:10:40 +0000 2021",
+      "id": 1408820015374159881,
+      "id_str": "1408820015374159881",
+      "text": "RT @DockYard: .@sm_debenedetto shares how a small team of engineers (who were mostly new to #Elixir) managed to over-deliver on a complex #…",
+      "truncated": false,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "Elixir",
+            "indices": [
+              92,
+              99
+            ]
+          }
+        ],
+        "symbols": [],
+        "user_mentions": [
+          {
+            "screen_name": "DockYard",
+            "name": "DockYard",
+            "id": 18545770,
+            "id_str": "18545770",
+            "indices": [
+              3,
+              12
+            ]
+          },
+          {
+            "screen_name": "sm_debenedetto",
+            "name": "Sophie DeBenedetto",
+            "id": 2911734821,
+            "id_str": "2911734821",
+            "indices": [
+              15,
+              30
+            ]
+          }
+        ],
+        "urls": []
+      },
+      "source": "<a href=\"https:\/\/mobile.twitter.com\" rel=\"nofollow\">Twitter Web App<\/a>",
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 1048544526812553217,
+        "id_str": "1048544526812553217",
+        "name": "Ivan Rublev",
+        "screen_name": "LevviBraun",
+        "location": "Hamburg, Germany",
+        "description": "Elixir Backend Engineer ⚡️ Software Crafter ⚡️ Ex-iOS Engineer",
+        "url": "https:\/\/t.co\/rO2uaCwiLn",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "url": "https:\/\/t.co\/rO2uaCwiLn",
+                "expanded_url": "http:\/\/ivanrublev.me",
+                "display_url": "ivanrublev.me",
+                "indices": [
+                  0,
+                  23
+                ]
+              }
+            ]
+          },
+          "description": {
+            "urls": []
+          }
+        },
+        "protected": false,
+        "followers_count": 167,
+        "friends_count": 807,
+        "listed_count": 4,
+        "created_at": "Sat Oct 06 12:04:30 +0000 2018",
+        "favourites_count": 630,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 329,
+        "lang": null,
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "F5F8FA",
+        "profile_background_image_url": null,
+        "profile_background_image_url_https": null,
+        "profile_background_tile": false,
+        "profile_image_url": "http:\/\/pbs.twimg.com\/profile_images\/1063215349376712706\/LyKXBwWc_normal.jpg",
+        "profile_image_url_https": "https:\/\/pbs.twimg.com\/profile_images\/1063215349376712706\/LyKXBwWc_normal.jpg",
+        "profile_banner_url": "https:\/\/pbs.twimg.com\/profile_banners\/1048544526812553217\/1542326391",
+        "profile_link_color": "1DA1F2",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "has_extended_profile": false,
+        "default_profile": true,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false,
+        "translator_type": "none",
+        "withheld_in_countries": []
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweeted_status": {
+        "created_at": "Fri Jun 25 16:44:21 +0000 2021",
+        "id": 1408466104050237444,
+        "id_str": "1408466104050237444",
+        "text": ".@sm_debenedetto shares how a small team of engineers (who were mostly new to #Elixir) managed to over-deliver on a… https:\/\/t.co\/bk0nUvRdU1",
+        "truncated": true,
+        "entities": {
+          "hashtags": [
+            {
+              "text": "Elixir",
+              "indices": [
+                78,
+                85
+              ]
+            }
+          ],
+          "symbols": [],
+          "user_mentions": [
+            {
+              "screen_name": "sm_debenedetto",
+              "name": "Sophie DeBenedetto",
+              "id": 2911734821,
+              "id_str": "2911734821",
+              "indices": [
+                1,
+                16
+              ]
+            }
+          ],
+          "urls": [
+            {
+              "url": "https:\/\/t.co\/bk0nUvRdU1",
+              "expanded_url": "https:\/\/twitter.com\/i\/web\/status\/1408466104050237444",
+              "display_url": "twitter.com\/i\/web\/status\/1…",
+              "indices": [
+                117,
+                140
+              ]
+            }
+          ]
+        },
+        "source": "<a href=\"https:\/\/mobile.twitter.com\" rel=\"nofollow\">Twitter Web App<\/a>",
+        "in_reply_to_status_id": null,
+        "in_reply_to_status_id_str": null,
+        "in_reply_to_user_id": null,
+        "in_reply_to_user_id_str": null,
+        "in_reply_to_screen_name": null,
+        "user": {
+          "id": 18545770,
+          "id_str": "18545770",
+          "name": "DockYard",
+          "screen_name": "DockYard",
+          "location": "Boston, MA",
+          "description": "DockYard is a digital product agency offering custom software, mobile, and web application development consulting.",
+          "url": "https:\/\/t.co\/SOssQPxUyi",
+          "entities": {
+            "url": {
+              "urls": [
+                {
+                  "url": "https:\/\/t.co\/SOssQPxUyi",
+                  "expanded_url": "https:\/\/dockyard.com",
+                  "display_url": "dockyard.com",
+                  "indices": [
+                    0,
+                    23
+                  ]
+                }
+              ]
+            },
+            "description": {
+              "urls": []
+            }
+          },
+          "protected": false,
+          "followers_count": 3922,
+          "friends_count": 174,
+          "listed_count": 195,
+          "created_at": "Fri Jan 02 04:51:52 +0000 2009",
+          "favourites_count": 172,
+          "utc_offset": null,
+          "time_zone": null,
+          "geo_enabled": false,
+          "verified": false,
+          "statuses_count": 2348,
+          "lang": null,
+          "contributors_enabled": false,
+          "is_translator": false,
+          "is_translation_enabled": false,
+          "profile_background_color": "9AE4E8",
+          "profile_background_image_url": "http:\/\/abs.twimg.com\/images\/themes\/theme16\/bg.gif",
+          "profile_background_image_url_https": "https:\/\/abs.twimg.com\/images\/themes\/theme16\/bg.gif",
+          "profile_background_tile": false,
+          "profile_image_url": "http:\/\/pbs.twimg.com\/profile_images\/1400203242928316416\/oKQMcpeb_normal.jpg",
+          "profile_image_url_https": "https:\/\/pbs.twimg.com\/profile_images\/1400203242928316416\/oKQMcpeb_normal.jpg",
+          "profile_banner_url": "https:\/\/pbs.twimg.com\/profile_banners\/18545770\/1622669445",
+          "profile_link_color": "1B95E0",
+          "profile_sidebar_border_color": "BDDCAD",
+          "profile_sidebar_fill_color": "DDFFCC",
+          "profile_text_color": "333333",
+          "profile_use_background_image": false,
+          "has_extended_profile": false,
+          "default_profile": false,
+          "default_profile_image": false,
+          "following": false,
+          "follow_request_sent": false,
+          "notifications": false,
+          "translator_type": "none",
+          "withheld_in_countries": []
+        },
+        "geo": null,
+        "coordinates": null,
+        "place": null,
+        "contributors": null,
+        "is_quote_status": false,
+        "retweet_count": 4,
+        "favorite_count": 16,
+        "favorited": false,
+        "retweeted": true,
+        "possibly_sensitive": false,
+        "lang": "en"
+      },
+      "is_quote_status": false,
+      "retweet_count": 4,
+      "favorite_count": 0,
+      "favorited": false,
+      "retweeted": true,
+      "lang": "en"
+    },
+    {
+      "created_at": "Fri Jun 25 15:55:52 +0000 2021",
+      "id": 1408453899061764102,
+      "id_str": "1408453899061764102",
+      "text": "RT @YellowBrickC: great idea to get more transparency, to challenge the strategic decisions #DDDEU \n@ZHerendi @trondhjort @kenny_baas @Jace…",
+      "truncated": false,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "DDDEU",
+            "indices": [
+              92,
+              98
+            ]
+          }
+        ],
+        "symbols": [],
+        "user_mentions": [
+          {
+            "screen_name": "YellowBrickC",
+            "name": "Krisztina 🇪🇺",
+            "id": 337240473,
+            "id_str": "337240473",
+            "indices": [
+              3,
+              16
+            ]
+          },
+          {
+            "screen_name": "ZHerendi",
+            "name": "Zsofia Herendi",
+            "id": 849352729885634561,
+            "id_str": "849352729885634561",
+            "indices": [
+              100,
+              109
+            ]
+          },
+          {
+            "screen_name": "trondhjort",
+            "name": "Trond Hjorteland",
+            "id": 31100371,
+            "id_str": "31100371",
+            "indices": [
+              110,
+              121
+            ]
+          },
+          {
+            "screen_name": "kenny_baas",
+            "name": "Kenny Baas-Schwegler",
+            "id": 484600984,
+            "id_str": "484600984",
+            "indices": [
+              122,
+              133
+            ]
+          }
+        ],
+        "urls": []
+      },
+      "source": "<a href=\"http:\/\/twitter.com\/download\/iphone\" rel=\"nofollow\">Twitter for iPhone<\/a>",
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 1048544526812553217,
+        "id_str": "1048544526812553217",
+        "name": "Ivan Rublev",
+        "screen_name": "LevviBraun",
+        "location": "Hamburg, Germany",
+        "description": "Elixir Backend Engineer ⚡️ Software Crafter ⚡️ Ex-iOS Engineer",
+        "url": "https:\/\/t.co\/rO2uaCwiLn",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "url": "https:\/\/t.co\/rO2uaCwiLn",
+                "expanded_url": "http:\/\/ivanrublev.me",
+                "display_url": "ivanrublev.me",
+                "indices": [
+                  0,
+                  23
+                ]
+              }
+            ]
+          },
+          "description": {
+            "urls": []
+          }
+        },
+        "protected": false,
+        "followers_count": 167,
+        "friends_count": 807,
+        "listed_count": 4,
+        "created_at": "Sat Oct 06 12:04:30 +0000 2018",
+        "favourites_count": 630,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 329,
+        "lang": null,
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "F5F8FA",
+        "profile_background_image_url": null,
+        "profile_background_image_url_https": null,
+        "profile_background_tile": false,
+        "profile_image_url": "http:\/\/pbs.twimg.com\/profile_images\/1063215349376712706\/LyKXBwWc_normal.jpg",
+        "profile_image_url_https": "https:\/\/pbs.twimg.com\/profile_images\/1063215349376712706\/LyKXBwWc_normal.jpg",
+        "profile_banner_url": "https:\/\/pbs.twimg.com\/profile_banners\/1048544526812553217\/1542326391",
+        "profile_link_color": "1DA1F2",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "has_extended_profile": false,
+        "default_profile": true,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false,
+        "translator_type": "none",
+        "withheld_in_countries": []
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweeted_status": {
+        "created_at": "Fri Jun 25 12:48:56 +0000 2021",
+        "id": 1408406856054235137,
+        "id_str": "1408406856054235137",
+        "text": "great idea to get more transparency, to challenge the strategic decisions #DDDEU \n@ZHerendi @trondhjort @kenny_baas… https:\/\/t.co\/WvPPI2Ypku",
+        "truncated": true,
+        "entities": {
+          "hashtags": [
+            {
+              "text": "DDDEU",
+              "indices": [
+                74,
+                80
+              ]
+            }
+          ],
+          "symbols": [],
+          "user_mentions": [
+            {
+              "screen_name": "ZHerendi",
+              "name": "Zsofia Herendi",
+              "id": 849352729885634561,
+              "id_str": "849352729885634561",
+              "indices": [
+                82,
+                91
+              ]
+            },
+            {
+              "screen_name": "trondhjort",
+              "name": "Trond Hjorteland",
+              "id": 31100371,
+              "id_str": "31100371",
+              "indices": [
+                92,
+                103
+              ]
+            },
+            {
+              "screen_name": "kenny_baas",
+              "name": "Kenny Baas-Schwegler",
+              "id": 484600984,
+              "id_str": "484600984",
+              "indices": [
+                104,
+                115
+              ]
+            }
+          ],
+          "urls": [
+            {
+              "url": "https:\/\/t.co\/WvPPI2Ypku",
+              "expanded_url": "https:\/\/twitter.com\/i\/web\/status\/1408406856054235137",
+              "display_url": "twitter.com\/i\/web\/status\/1…",
+              "indices": [
+                117,
+                140
+              ]
+            }
+          ]
+        },
+        "source": "<a href=\"https:\/\/about.twitter.com\/products\/tweetdeck\" rel=\"nofollow\">TweetDeck<\/a>",
+        "in_reply_to_status_id": null,
+        "in_reply_to_status_id_str": null,
+        "in_reply_to_user_id": null,
+        "in_reply_to_user_id_str": null,
+        "in_reply_to_screen_name": null,
+        "user": {
+          "id": 337240473,
+          "id_str": "337240473",
+          "name": "Krisztina 🇪🇺",
+          "screen_name": "YellowBrickC",
+          "location": "Köln",
+          "description": "Experience is the only thing that brings knowledge. The longer you are on earth the more experience you get (The Wizard of Oz)\n *she\/her*",
+          "url": "https:\/\/t.co\/l04OOjIrdG",
+          "entities": {
+            "url": {
+              "urls": [
+                {
+                  "url": "https:\/\/t.co\/l04OOjIrdG",
+                  "expanded_url": "http:\/\/www.yellow-brick-code.org\/",
+                  "display_url": "yellow-brick-code.org",
+                  "indices": [
+                    0,
+                    23
+                  ]
+                }
+              ]
+            },
+            "description": {
+              "urls": []
+            }
+          },
+          "protected": false,
+          "followers_count": 1126,
+          "friends_count": 253,
+          "listed_count": 78,
+          "created_at": "Sun Jul 17 18:07:33 +0000 2011",
+          "favourites_count": 2340,
+          "utc_offset": null,
+          "time_zone": null,
+          "geo_enabled": true,
+          "verified": false,
+          "statuses_count": 22743,
+          "lang": null,
+          "contributors_enabled": false,
+          "is_translator": false,
+          "is_translation_enabled": false,
+          "profile_background_color": "084582",
+          "profile_background_image_url": "http:\/\/abs.twimg.com\/images\/themes\/theme19\/bg.gif",
+          "profile_background_image_url_https": "https:\/\/abs.twimg.com\/images\/themes\/theme19\/bg.gif",
+          "profile_background_tile": true,
+          "profile_image_url": "http:\/\/pbs.twimg.com\/profile_images\/1448253003\/chi_220x209-150x150_normal.jpg",
+          "profile_image_url_https": "https:\/\/pbs.twimg.com\/profile_images\/1448253003\/chi_220x209-150x150_normal.jpg",
+          "profile_banner_url": "https:\/\/pbs.twimg.com\/profile_banners\/337240473\/1398618704",
+          "profile_link_color": "084582",
+          "profile_sidebar_border_color": "5CA4EB",
+          "profile_sidebar_fill_color": "5CA4EB",
+          "profile_text_color": "477006",
+          "profile_use_background_image": true,
+          "has_extended_profile": false,
+          "default_profile": false,
+          "default_profile_image": false,
+          "following": true,
+          "follow_request_sent": false,
+          "notifications": false,
+          "translator_type": "none",
+          "withheld_in_countries": []
+        },
+        "geo": null,
+        "coordinates": null,
+        "place": null,
+        "contributors": null,
+        "is_quote_status": false,
+        "retweet_count": 4,
+        "favorite_count": 11,
+        "favorited": false,
+        "retweeted": true,
+        "possibly_sensitive": false,
+        "lang": "en"
+      },
+      "is_quote_status": false,
+      "retweet_count": 4,
+      "favorite_count": 0,
+      "favorited": false,
+      "retweeted": true,
+      "lang": "en"
+    },
+    {
+      "created_at": "Tue Jun 22 14:24:20 +0000 2021",
+      "id": 1407343703509843976,
+      "id_str": "1407343703509843976",
+      "text": "@ziobrando In regards to cycles It may be a point when you return to the list of questions you’ve probably planned… https:\/\/t.co\/hs8A5BDz52",
+      "truncated": true,
+      "entities": {
+        "hashtags": [],
+        "symbols": [],
+        "user_mentions": [
+          {
+            "screen_name": "ziobrando",
+            "name": "Alberto Brandolini",
+            "id": 15738236,
+            "id_str": "15738236",
+            "indices": [
+              0,
+              10
+            ]
+          }
+        ],
+        "urls": [
+          {
+            "url": "https:\/\/t.co\/hs8A5BDz52",
+            "expanded_url": "https:\/\/twitter.com\/i\/web\/status\/1407343703509843976",
+            "display_url": "twitter.com\/i\/web\/status\/1…",
+            "indices": [
+              116,
+              139
+            ]
+          }
+        ]
+      },
+      "source": "<a href=\"http:\/\/twitter.com\/download\/iphone\" rel=\"nofollow\">Twitter for iPhone<\/a>",
+      "in_reply_to_status_id": 1407320656782499849,
+      "in_reply_to_status_id_str": "1407320656782499849",
+      "in_reply_to_user_id": 15738236,
+      "in_reply_to_user_id_str": "15738236",
+      "in_reply_to_screen_name": "ziobrando",
+      "user": {
+        "id": 1048544526812553217,
+        "id_str": "1048544526812553217",
+        "name": "Ivan Rublev",
+        "screen_name": "LevviBraun",
+        "location": "Hamburg, Germany",
+        "description": "Elixir Backend Engineer ⚡️ Software Crafter ⚡️ Ex-iOS Engineer",
+        "url": "https:\/\/t.co\/rO2uaCwiLn",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "url": "https:\/\/t.co\/rO2uaCwiLn",
+                "expanded_url": "http:\/\/ivanrublev.me",
+                "display_url": "ivanrublev.me",
+                "indices": [
+                  0,
+                  23
+                ]
+              }
+            ]
+          },
+          "description": {
+            "urls": []
+          }
+        },
+        "protected": false,
+        "followers_count": 167,
+        "friends_count": 807,
+        "listed_count": 4,
+        "created_at": "Sat Oct 06 12:04:30 +0000 2018",
+        "favourites_count": 630,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 329,
+        "lang": null,
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "F5F8FA",
+        "profile_background_image_url": null,
+        "profile_background_image_url_https": null,
+        "profile_background_tile": false,
+        "profile_image_url": "http:\/\/pbs.twimg.com\/profile_images\/1063215349376712706\/LyKXBwWc_normal.jpg",
+        "profile_image_url_https": "https:\/\/pbs.twimg.com\/profile_images\/1063215349376712706\/LyKXBwWc_normal.jpg",
+        "profile_banner_url": "https:\/\/pbs.twimg.com\/profile_banners\/1048544526812553217\/1542326391",
+        "profile_link_color": "1DA1F2",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "has_extended_profile": false,
+        "default_profile": true,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false,
+        "translator_type": "none",
+        "withheld_in_countries": []
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "is_quote_status": false,
+      "retweet_count": 0,
+      "favorite_count": 0,
+      "favorited": false,
+      "retweeted": false,
+      "lang": "en"
+    }
+  ]

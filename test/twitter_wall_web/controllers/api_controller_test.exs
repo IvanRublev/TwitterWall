@@ -1,13 +1,16 @@
 defmodule TwitterWallWeb.ApiControllerTest do
   use TwitterWallWeb.ConnCase, async: true
-  import Mox
+
+  import Builders
+  import Stubs
 
   alias TwitterWallWeb.AuthToken
+
+  setup [:default_stubs]
 
   describe "GET /api/tweets should" do
     test "return 401 when no JWT auth header is given", %{conn: conn} do
       conn = get(conn, "/api/tw.json")
-
       assert json_response(conn, 401) == %{"result" => "Unauthorized"}
     end
 
@@ -112,7 +115,10 @@ defmodule TwitterWallWeb.ApiControllerTest do
     end
 
     test "return tweets in amount of JWT token tweet_count claim's value", %{conn: conn} do
-      stub_with(TwitterWall.Double, TwitterWall.Stub)
+      stub_wall_get_tweets(fn _arg ->
+        tweets = Enum.map(1..4, &build_tweet(html: "tweet#{&1}", kind: if(rem(&1, 2) == 0, do: :liked, else: :posted)))
+        build_tweet_aggregate(tweets: tweets, errors: [])
+      end)
 
       token =
         AuthToken.generate_and_sign!(%{
@@ -127,12 +133,15 @@ defmodule TwitterWallWeb.ApiControllerTest do
 
       assert %{
                "html" =>
-                 "<div class=\"tw_box\"><div class=\"tw_posted\"></div><blockquote>tweet1</blockquote></div><div class=\"tw_box\"><div class=\"tw_liked\"></div><blockquote>tweet2</blockquote></div><div class=\"tw_box\"><div class=\"tw_posted\"></div><blockquote>tweet3</blockquote></div><div class=\"tw_box\"><div class=\"tw_liked\"></div><blockquote>tweet4</blockquote></div>"
+                 "<div class=\"tw_box\"><div class=\"tw_posted\"></div>tweet1</div><div class=\"tw_box\"><div class=\"tw_liked\"></div>tweet2</div><div class=\"tw_box\"><div class=\"tw_posted\"></div>tweet3</div><div class=\"tw_box\"><div class=\"tw_liked\"></div>tweet4</div>"
              } = json_response(conn, 200)
     end
 
     test "return js snippet for tweets rendering", %{conn: conn} do
-      stub_with(TwitterWall.Double, TwitterWall.Stub)
+      stub_wall_get_tweets(fn _arg ->
+        tweets = Enum.map(1..4, &build_tweet(html: "tweet#{&1}", kind: if(rem(&1, 2) == 0, do: :liked, else: :posted)))
+        build_tweet_aggregate(tweets: tweets, errors: [])
+      end)
 
       token =
         AuthToken.generate_and_sign!(%{
@@ -168,13 +177,8 @@ defmodule TwitterWallWeb.ApiControllerTest do
     end
 
     test "return 500 on twitter wall failure", %{conn: conn} do
-      TwitterWall.Double
-      |> stub(:last_liked_or_posted, fn _ ->
-        {:error,
-         [
-           {TwitterService, :liked_tweets, :err404},
-           {TwitterService, :posted_tweets, :err500}
-         ]}
+      stub_wall_get_tweets(fn _arg ->
+        build_tweet_aggregate(tweets: [build_tweet()], errors: [%{status: 404}, %{status: 500}])
       end)
 
       token =

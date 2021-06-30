@@ -1,71 +1,13 @@
 defmodule TwitterWallWeb.FeedLive do
-  use Phoenix.LiveView
+  @moduledoc false
 
-  def mount(_session, socket) do
-    {:ok, populate_assigns(socket, 3)}
-  end
+  use TwitterWallWeb, :live_view
 
-  defp populate_assigns(socket, count) do
-    socket = add_validated_count(socket, count)
+  alias TwitterWall.Config
 
-    if is_nil(socket.assigns[:input_error]) == false do
-      socket
-      |> assign(:tweets_html, "")
-      |> assign(:general_error, false)
-    else
-      case TwitterWall.last_liked_or_posted(count) do
-        {:ok, htmls_kinds} ->
-          socket
-          |> assign(:tweets_html, tweets_raw_html(htmls_kinds))
-          |> assign(:general_error, false)
-
-        {:error, _} ->
-          socket
-          |> assign(:tweets_html, "")
-          |> assign(:general_error, true)
-      end
-    end
-  end
-
-  defp tweets_raw_html(htmls_kinds) do
-    htmls_kinds
-    |> Enum.map(& joined_html(&1))
-    |> Phoenix.HTML.raw()
-  end
-
-  defp joined_html({tw_html, kind}) do
-    "<div class=\"tw_box\"><div class=\"tw_#{Atom.to_string(kind)}\"></div>#{tw_html}</div>"
-  end
-
-  defp add_validated_count(socket, count) when is_number(count) do
-    input_error =
-      if count not in 1..10 do
-        "Count should be in the 1..10 range. The value is #{count}."
-      else
-        nil
-      end
-
-    socket
-    |> assign(:count, count)
-    |> assign(:input_error, input_error)
-  end
-
+  @impl true
   def render(assigns) do
     ~L"""
-    <form action="#" phx-change="ch_count">
-    <h1>List of <input type="number" name="tw_count" value="<%= @count %>" id="header_tw_count"/> liked and posted tweets by <a href="https://twitter.com/LevviBraun">LevviBraun</a></h1>
-    </form>
-
-    <%= if @general_error do %>
-      <div>Can't show anything. Connection to Twitter is Fuzzy today 🤪</div>
-    <% end %>
-    <%= if @input_error do %>
-      <p class="alert alert-danger" role="alert"><%= @input_error %></p>
-    <% end %>
-    <div id="feed" phx-hook="RerenderTweets">
-      <%= @tweets_html %>
-    </div>
-
     <script>window.twttr = (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0],
         t = window.twttr || {};
@@ -82,15 +24,85 @@ defmodule TwitterWallWeb.FeedLive do
 
       return t;
     }(document, "script", "twitter-wjs"));</script>
+
+    <form action="#" phx-change="change_count">
+      <h1>List of <input type="number" name="count" value="<%= @count %>" id="header_tw_count"/> liked and posted tweets by&nbsp;<%= link @user, to: "https://twitter.com/#{@user}" %></h1>
+    </form>
+
+    <%= if assigns[:error] do %>
+      <p class="alert alert-danger" role="alert" id="error"><%= @error %></p>
+    <% end %>
+
+    <div id="feed" phx-hook="RerenderTweets">
+      <%= for tweet <- @tweets_list do %>
+        <div class="tw_box"><div class="tw_<%= Atom.to_string(tweet.kind) %>"></div><%= raw(tweet.html) %></div>
+      <% end %>
+    </div>
     """
   end
 
-  def handle_event("ch_count", %{"tw_count" => ""}, socket) do
+  @impl true
+  def mount(_params, session, socket) do
+    config = session["config"] || Config.get()
+    user = Keyword.fetch!(config, :screen_name)
+    count = Keyword.fetch!(config, :default_tweet_count)
+
+    task = get_tweets(count)
+
+    {:ok,
+     socket
+     |> assign(user: user)
+     |> assign(count: count)
+     |> assign(tweets_list: [])
+     |> assign(get_tweets_task: task)}
+  end
+
+  defp get_tweets(previous_task \\ nil, count) do
+    if previous_task do
+      Task.shutdown(previous_task, :brutal_kill)
+    end
+
+    Task.async(fn -> TwitterWall.get_tweets(count) end)
+  end
+
+  @impl true
+  def handle_event("change_count", %{"count" => count_string}, socket) do
+    socket =
+      case TwitterWall.validate_count(count_string) do
+        {:ok, count} ->
+          socket
+          |> assign(:count, count)
+          |> assign(:get_tweets_task, get_tweets(socket.assigns[:get_tweets_task], count))
+
+        {:error, attrs} ->
+          assign(socket, error: build_input_error_message(attrs))
+      end
+
     {:noreply, socket}
   end
 
-  def handle_event("ch_count", %{"tw_count" => count}, socket) do
-    count = String.to_integer(count)
-    {:noreply, populate_assigns(socket, count)}
+  @impl true
+  def handle_info({ref, aggregate}, %{assigns: %{get_tweets_task: %Task{ref: ref}}} = socket) do
+    Process.demonitor(ref, [:flush])
+
+    {:noreply,
+     socket
+     |> assign(tweets_list: aggregate.tweets)
+     |> assign(error: build_api_error(aggregate.errors))}
   end
+
+  @impl true
+  def handle_info(_message, socket) do
+    {:noreply, socket}
+  end
+
+  defp build_input_error_message(attrs) do
+    """
+    Count should be an integer in the #{inspect(attrs[:expected_range])} range. \
+    Given value is #{inspect(attrs[:value])}.\
+    """
+  end
+
+  defp build_api_error([]), do: nil
+  defp build_api_error([_ | _]), do: "Output is limited. Connection to Twitter is Fuzzy today 🤪"
 end

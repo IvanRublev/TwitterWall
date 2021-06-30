@@ -1,8 +1,0 @@
-install:
-  - mix local.rebar --force; mix local.hex --force; mix deps.get
-script:
-  - git remote add gigalixir https://$GIGALIXIR_EMAIL:$GIGALIXIR_API_KEY@git.gigalixir.com/$GIGALIXIR_APP_NAME.git
-  - MIX_ENV=test mix coveralls.travis && git push -f gigalixir HEAD:refs/heads/master
-language: elixir
-elixir: ${elixir}
-otp_release: ${erlang}

@@ -1,16 +1,12 @@
 defmodule TwitterWall do
   @moduledoc """
-  A behaviour module for implementing the wall of tweets to be displayed.
+  Twitter Wall context that is a Service returning liked and posted tweets aggregated into single timeline.
   """
-  use Knigge,
-    otp_app: :twitter_wall
 
-  @callback last_liked_or_posted(count :: non_neg_integer) ::
-              {:ok, list(String.t())} | {:error, list(any())}
+  use Knigge, implementation: Application.compile_env(:twitter_wall, __MODULE__, TwitterWallImpl)
 
-  @callback last_liked_or_posted(
-              count :: non_neg_integer,
-              opts :: [now: DateTime.t(), reset_cache: bool()]
-            ) ::
-              {:ok, list(String.t())} | {:error, list(any())}
+  alias TwitterWall.Core.TweetAggregate
+
+  @callback validate_count(count_string :: String.t()) :: {:ok, integer()} | {:error, String.t()}
+  @callback get_tweets(count :: integer()) :: TweetAggregate.t()
 end

@@ -1,6 +1,9 @@
 defmodule TwitterWallWeb.ApiController do
   use TwitterWallWeb, :controller
+
   require Logger
+
+  alias TwitterWall.Utility.IntegerParser
   alias TwitterWallWeb.AuthToken
 
   @rendering_snippet """
@@ -27,21 +30,22 @@ defmodule TwitterWallWeb.ApiController do
          {:ok, token} <- token(header),
          {:ok, claims} <- AuthToken.verify(token),
          {:ok, claims} <- AuthToken.validate(claims),
-         {:ok, tweet_count} <- Integer.Parse.safe(claims["tweet_count"]),
+         {:ok, tweet_count} <- IntegerParser.parse_integer_safe(claims["tweet_count"]),
          {:ok, tweet_count} <- range_count(tweet_count) do
       if tweet_count == 0 do
-        a_json(conn, %{html: ""})
+        json(conn, %{html: ""})
       else
-        case TwitterWall.last_liked_or_posted(tweet_count) do
-          {:ok, htmls_kinds} ->
-            a_json(conn, %{
-              html:
-              htmls_kinds |> Enum.map(& joined_html(&1)) |> Enum.join(),
-              js_rendering_snippet: @rendering_snippet
-            })
+        tweet_aggregate = TwitterWall.get_tweets(tweet_count)
 
-          _ ->
-            send_error(conn, 500, "Subsequent request failed")
+        if Enum.empty?(tweet_aggregate.errors) do
+          tweets_html =
+            tweet_aggregate.tweets
+            |> Enum.map(&wrap_kind_html(&1.html, &1.kind))
+            |> Enum.join()
+
+          json(conn, %{html: tweets_html, js_rendering_snippet: @rendering_snippet})
+        else
+          send_error(conn, 500, "Subsequent request failed")
         end
       end
     else
@@ -65,7 +69,7 @@ defmodule TwitterWallWeb.ApiController do
     end
   end
 
-  defp joined_html({tw_html, kind}) do
+  defp wrap_kind_html(tw_html, kind) do
     "<div class=\"tw_box\"><div class=\"tw_#{Atom.to_string(kind)}\"></div>#{tw_html}</div>"
   end
 
@@ -85,17 +89,11 @@ defmodule TwitterWallWeb.ApiController do
   end
 
   defp send_error(conn, status, message) do
-    Logger.debug("#{__MODULE__} authorization error: #{message}.")
+    Logger.debug("#{__MODULE__} error: #{message}.")
 
     conn
     |> put_status(status)
-    |> a_json(%{result: message})
+    |> json(%{result: message})
     |> halt()
-  end
-
-  defp a_json(conn, map) do
-    conn
-    |> put_resp_content_type("application/json")
-    |> text(Jason.encode!(map))
   end
 end

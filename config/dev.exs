@@ -7,7 +7,6 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :twitter_wall, TwitterWallWeb.Endpoint,
-  http: [port: 4001],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -50,8 +49,7 @@ config :twitter_wall, TwitterWallWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
-      ~r"lib/twitter_wall_web/{live,views}/.*(ex)$",
+      ~r"lib/twitter_wall_web/(live|views)/.*(ex)$",
       ~r"lib/twitter_wall_web/templates/.*(eex)$"
     ]
   ]
@@ -65,5 +63,3 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
-
-config :mix_test_watch, clear: true

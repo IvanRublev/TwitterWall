@@ -8,5 +8,4 @@ deploy
 deps
 doc
 .fetch
-.env
 .sobelow

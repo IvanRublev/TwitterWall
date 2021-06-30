@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "mix compile",
+            "command": "asdf exec direnv exec . mix compile",
             "problemMatcher": [
                 "$mixCompileError",
                 "$mixCompileWarning"
@@ -16,7 +16,7 @@
         {
             "label": "test",
             "type": "shell",
-            "command": "mix test.watch --stale",
+            "command": "asdf exec direnv exec . mix test.watch --stale",
             "problemMatcher": [
                 "$mixCompileError",
                 "$mixCompileWarning",
@@ -30,7 +30,7 @@
         {
             "label": "test cursor",
             "type": "shell",
-            "command": "mix test ${relativeFile}:${lineNumber}",
+            "command": "asdf exec direnv exec . mix test.watch ${relativeFile}:${lineNumber}",
             "problemMatcher": [
                 "$mixCompileError",
                 "$mixCompileWarning",
@@ -44,22 +44,30 @@
         {
             "label": "format",
             "type": "shell",
-            "command": "mix format",
+            "command": "asdf exec direnv exec . mix format",
             "problemMatcher": [
                 "$mixCompileError",
                 "$mixCompileWarning"
             ],
-            "group": "build"
+            "group": "build",
+            "presentation": {
+                "reveal": "never",
+                "focus": false,
+            }
         },
         {
-            "label": "typecheck",
+            "label": "test file",
             "type": "shell",
-            "command": "mix dialyzer",
+            "command": "asdf exec direnv exec . mix test.watch ${relativeFile}",
             "problemMatcher": [
                 "$mixCompileError",
-                "$mixCompileWarning"
+                "$mixCompileWarning",
+                "$mixTestFailure"
             ],
-            "group": "build"
-        },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
     ]
 }

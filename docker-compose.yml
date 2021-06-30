@@ -1,0 +1,40 @@
+version: "2.3"
+
+services:
+  dev:
+    image: inanrublev/twitterwall-dev
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+      args:
+        ELIXIR_VERSION: ${ELIXIR_VERSION}
+        OTP_VERSION: ${ERLANG_OTP_VERSION}
+        ALPINE_VERSION: ${ALPINE_VERSION}
+    env_file:
+      - .env
+    volumes:
+      - ./:/home/developer/workspace
+    ports:
+      - 127.0.0.1:4000:4000
+    networks:
+      - default
+
+  release:
+    image: inanrublev/twitterwall
+    build:
+      context: .
+      args:
+        ELIXIR_VERSION: ${ELIXIR_VERSION? Missing value for ELIXIR_VERSION}
+        OTP_VERSION: ${ERLANG_OTP_VERSION? Missing value for ERLANG_OTP_VERSION}
+        ALPINE_VERSION: ${ALPINE_VERSION? Missing value for ALPINE_VERSION}
+        BUILD_RELEASE_FROM: ${BUILD_RELEASE_FROM? Missing value for BUILD_RELEASE_FROM}
+
+  prod:
+    image: inanrublev/twitterwall
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:8000:8000
+    env_file:
+      - .env
+    networks:
+      - default

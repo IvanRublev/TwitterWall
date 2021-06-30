@@ -2,11 +2,20 @@
 
 [![Build Status](https://travis-ci.org/IvanRublev/TwitterWall.svg?branch=master)](https://travis-ci.org/IvanRublev/TwitterWall) [![Coverage Status](https://coveralls.io/repos/github/IvanRublev/TwitterWall/badge.svg)](https://coveralls.io/github/IvanRublev/TwitterWall) ![Method TDD](https://img.shields.io/badge/method-TDD-blue) [![Uptime Robot ratio (7 days)](https://img.shields.io/uptimerobot/ratio/7/m783792183-0d609ad00cc5d32c7dcabce1)](https://tw.ivanrublev.me)
 
-A simple microservice to display posted and liked tweets of a person written in Elixir.
+A simple micro-service to display posted and liked tweets of a person written in Elixir.
 
 An instance of the app is deployed with Gigalixir on Google Cloud Platform and accessible on https://tw.ivanrublev.me. It displays last three posted + liked tweets from the [author's Twitter account](https://twitter.com/levvibraun). 
 
-The app has an API endpoint accessible at `/api/tw.json` providing the requested number of tweets as html. A JWT key is required to call the endpoint, that can be provided on request. One example of the microservice usage is on the author's homepage on https://ivanrublev.me/#twitterwall
+The app has an API endpoint accessible at `/api/tw.json` providing the requested number of tweets as html. A JWT key is required to call the endpoint. Short living one can be generated with `mix bearer_token` command. One example of the micro-service integration is on the author's homepage on https://ivanrublev.me/#twitterwall
+
+## Development
+
+To start your Phoenix server:
+
+  * Install dependencies with `mix setup`
+  * Start Phoenix endpoint with `mix phx.server`
+
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ## Deployment
 
@@ -14,60 +23,91 @@ The app is prepared according to https://12factor.net/ methodology. The app's co
 
 Deployment options are:
 
-* Docker image for local testing, can be produced with `cd deploy && ./build_image.sh`
+* Gigalixir, create an app according to the service's instructions, setup .env file as shown below and complete deployment with `./deploy_gigalixir.sh`
 
-* Gigalixir, create an app according to the service's instructions and complete deployment with `cd deploy && ./deploy_gigalixir.sh`
+* Docker images for Development and Production, can be produced by steps given below.
 
-## Installation for development
+### Setup Env file
 
-You can install an Elixir environment to run the project on macOS using the asdf version manager:
-
-  * Install https://asdf-vm.com/ runtime management tool with `brew install asdf`
-  * Add it to the shell with
-    ```
-    echo -e '\n. $(brew --prefix asdf)/asdf.sh' >> ~/.bash_profile
-    echo -e '\n. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash' >> ~/.bash_profile
-    ```
-  * Restart the terminal
-  * Install asdf plugins:
-    ```
-    asdf plugin-add elixir
-    asdf plugin-add erlang
-    asdf plugin-add nodejs
-    ```
-  * Install Elixir/Erlang/NodeJS runtimes in project's directory with `cd TwitterWall && asdf install` 
-
-  * Install direnv and set it globally if wasn't done before
-    + `asdf plugin-add direnv && asdf install direnv 2.20.0 && asdf global  direnv 2.20.0`
-    + Follow the [instructions to hook direnv](https://github.com/direnv/direnv/blob/master/docs/hook.md) into your SHELL
-
-
-## Development Webserver
-
-To start the project's webserver:
-
-  * In the project's directory `cd TwitterWall`
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `cd assets && npm install && cd -`
-  * Start Phoenix endpoint with `mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-
-### Start with secrets populated
-
-To start the project's webserver with secrets values populated with environment variables value you can create the following `.env` file in the project's directory:
+Copy the example file:
 
 ```
-TWITTER_USER_SCREEN_NAME=u
-BEARER_TOKEN=a
-OAUTH_CONSUMER_KEY=b
-OAUTH_CONSUMER_SECRET=c
-OAUTH_TOKEN=d
-OAUTH_TOKEN_SECRET=e
+cp .env.example .env
 ```
 
-Then allow the file with `cd TwitterWall && direnv allow`. And start the Phoenix endpoint with `./emix.sh phx.server`
+Add the secret generated with `mix phx.gen.secret` to the `.env` file:
+
+```
+SECRET_KEY_BASE=generated_secret
+```
+
+Set the following keys to appropriate values from https://developer.twitter.com/en/portal/dashboard
+
+* TWITTER_USER_SCREEN_NAME
+* BEARER_TOKEN
+* OAUTH_CONSUMER_KEY 
+* OAUTH_CONSUMER_SECRET 
+* OAUTH_TOKEN 
+* OAUTH_TOKEN_SECRET 
+
+Add the secret key for API endpoint JWT token generated with `mix phx.gen.secret`:
+
+```
+JWT_HS_KEY=generated_secret
+```
+
+This key can be used to generate JWT bearer tokens to request endpoint.
+
+### Dev
+
+Docker compose mounts project's root folder into the dev container, so all changes are persisted.
+
+Build the development image:
+
+```
+docker-compose build dev
+```
+
+Get a shell inside the docker container:
+
+```
+docker-compose run --rm --service-ports dev
+```
+
+In case you have already fetched the deps and build the app from the host you can remove the build and deps folder:
+
+```
+rm -rf _build deps && mix setup
+```
+
+Run server with:
+
+```
+iex -S mix phx.server
+```
+
+Visit http://localhost:4000 
+
+### Prod
+
+Docker checks outs files for release from the master branch.
+
+Build the release:
+
+```
+docker-compose build release
+```
+
+Run the release:
+
+```
+docker-compose up prod
+```
+
+Visit http://localhost:8000
+
+
+* Docker files are inspired by work of @exadra37.
 
 ## Licence
 

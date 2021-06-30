@@ -5,17 +5,22 @@ defmodule TwitterWallWeb.AuthToken do
   use Joken.Config,
     default_signer: :none
 
+  alias TwitterWall.Config
+  alias TwitterWall.Utility.IntegerParser
+
   def before_sign(_opts, {token_config, _signer}) do
-    {:cont, {token_config, Application.fetch_env!(:joken, :default_signer_struct)}}
+    signer = Config.get() |> Keyword.fetch!(:tw_api_joken_signer)
+    {:cont, {token_config, signer}}
   end
 
   def before_verify(_opts, {token, _signer}) do
-    {:cont, {token, Application.fetch_env!(:joken, :default_signer_struct)}}
+    signer = Config.get() |> Keyword.fetch!(:tw_api_joken_signer)
+    {:cont, {token, signer}}
   end
 
   def token_config do
     add_claim(%{}, "exp", nil, fn val ->
-      case Integer.Parse.safe(val) do
+      case IntegerParser.parse_integer_safe(val) do
         {:ok, int_val} -> int_val > Joken.current_time()
         _ -> false
       end
