@@ -5,7 +5,7 @@ port = String.to_integer(System.get_env("PORT", "4000"))
 
 config :twitter_wall, TwitterWallWeb.Endpoint,
   secret_key_base: secret_key_base,
-  url: [host: "localhost", port: port],
+  url: [host: System.get_env("HOST", "localhost"), port: port],
   http: [
     port: port,
     transport_options: [socket_opts: [:inet6]]
