@@ -37,10 +37,10 @@ defmodule TwitterWall.MixProject do
     [
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.14.1", only: [:dev, :test], runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:sobelow, "~> 0.11.1", only: :dev, runtime: false},
-      {:credo, "~> 1.5", only: :dev, runtime: false},
-      {:ex_check, ">= 0.0.0", only: [:dev, :test], runtime: false},
+      {:ex_check, ">= 0.0.0", only: :test, runtime: false},
+      {:credo, "~> 1.5", only: :test, runtime: false},
+      {:sobelow, "~> 0.11.1", only: :test, runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :test, runtime: false},
       {:bypass, "~> 2.1", only: :test},
       {:mox, "~> 1.0", only: :test},
       {:knigge, "~> 1.4"},
@@ -82,7 +82,11 @@ defmodule TwitterWall.MixProject do
       coveralls: :test,
       "coveralls.detail": :test,
       "coveralls.post": :test,
-      "coveralls.html": :test
+      "coveralls.html": :test,
+      "coveralls.travis": :test,
+      check: :test,
+      credo: :test,
+      sobelow: :test
     ]
   end
 end
