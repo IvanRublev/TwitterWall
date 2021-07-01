@@ -45,5 +45,6 @@ defmodule TwitterWallWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug TwitterWallWeb.CORSRouter
   plug TwitterWallWeb.Router
 end

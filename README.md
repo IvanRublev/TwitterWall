@@ -35,10 +35,12 @@ Copy the example file:
 cp .env.example .env
 ```
 
-Add the secret generated with `mix phx.gen.secret` to the `.env` file:
+Add the secrets generated with `mix phx.gen.secret` for the following keys in the `.env` file:
 
 ```
-SECRET_KEY_BASE=generated_secret
+SECRET_KEY_BASE=generated_secret_1
+LV_SIGNING_SALT=generated_secret_2
+JWT_HS_KEY=generated_secret_3
 ```
 
 Set the following keys to appropriate values from https://developer.twitter.com/en/portal/dashboard
@@ -49,14 +51,6 @@ Set the following keys to appropriate values from https://developer.twitter.com/
 * OAUTH_CONSUMER_SECRET 
 * OAUTH_TOKEN 
 * OAUTH_TOKEN_SECRET 
-
-Add the secret key for API endpoint JWT token generated with `mix phx.gen.secret`:
-
-```
-JWT_HS_KEY=generated_secret
-```
-
-This key can be used to generate JWT bearer tokens to request endpoint.
 
 ### Dev
 
