@@ -1,6 +1,6 @@
 # TwitterWall
 
-[![Build Status](https://travis-ci.org/IvanRublev/TwitterWall.svg?branch=master)](https://travis-ci.org/IvanRublev/TwitterWall) [![Coverage Status](https://coveralls.io/repos/github/IvanRublev/TwitterWall/badge.svg)](https://coveralls.io/github/IvanRublev/TwitterWall) ![Method TDD](https://img.shields.io/badge/method-TDD-blue) [![Uptime Robot ratio (7 days)](https://img.shields.io/uptimerobot/ratio/7/m783792183-0d609ad00cc5d32c7dcabce1)](https://tw.ivanrublev.me)
+[![Build Status](https://travis-ci.com/IvanRublev/TwitterWall.svg?branch=master)](https://travis-ci.com/IvanRublev/TwitterWall) [![Coverage Status](https://coveralls.io/repos/github/IvanRublev/TwitterWall/badge.svg)](https://coveralls.io/github/IvanRublev/TwitterWall) ![Method TDD](https://img.shields.io/badge/method-TDD-blue) [![Uptime Robot ratio (7 days)](https://img.shields.io/uptimerobot/ratio/7/m783792183-0d609ad00cc5d32c7dcabce1)](https://tw.ivanrublev.me)
 
 A simple micro-service to display posted and liked tweets of a person written in Elixir.
 
